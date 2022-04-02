@@ -25,9 +25,11 @@ public class PlayerMovement : MonoBehaviour
         if((Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.W)) && isGrounded())
         {
             playerObj.GetComponent<Rigidbody2D>().velocity = new Vector2(this.playerObj.GetComponent<Rigidbody2D>().velocity.x, jumpHeight);
+            Debug.DrawRay(playerObj.transform.position, -Vector3.up, Color.green, groundDistance - 0.2f);
+
         }
 
-        if(Input.GetKey(KeyCode.A)) //move left
+        if (Input.GetKey(KeyCode.A)) //move left
         {
             if (playerObj.GetComponent<Rigidbody2D>().velocity.x < -4)
                 return;
