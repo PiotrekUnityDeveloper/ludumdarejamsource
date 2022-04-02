@@ -25,7 +25,7 @@ public class Saver : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.T))
         {
-            LoadLocalGame(false); 
+            LoadLocalGame(false);
         }
     }
 
