@@ -25,7 +25,7 @@ public class Saver : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.T))
         {
-            LoadLocalGame();
+            LoadLocalGame(false); 
         }
     }
 
@@ -113,17 +113,21 @@ public class Saver : MonoBehaviour
         StartCoroutine(delaySavetext());
     }
 
-    public void LoadLocalGame()
+    public void LoadLocalGame(bool noplayer)
     {
         saveText.text = "Game Loaded";
 
-        //loading player position 
-        player.transform.position = new Vector2(PlayerPrefs.GetFloat("playerXpos", 0), PlayerPrefs.GetFloat("playerYpos", 0));
-        //loading player rotation
-        player.transform.rotation = Quaternion.Euler(player.transform.rotation.x, player.transform.rotation.y, PlayerPrefs.GetFloat("playerZrot", 0));
-        //loading player velocity
-        player.GetComponent<Rigidbody2D>().velocity = new Vector2(PlayerPrefs.GetFloat("playerXvel", 0), PlayerPrefs.GetFloat("playerYvel", 0));
-        //done for the player
+        if(noplayer == false)
+        {
+            //loading player position 
+            player.transform.position = new Vector2(PlayerPrefs.GetFloat("playerXpos", 0), PlayerPrefs.GetFloat("playerYpos", 0));
+            //loading player rotation
+            player.transform.rotation = Quaternion.Euler(player.transform.rotation.x, player.transform.rotation.y, PlayerPrefs.GetFloat("playerZrot", 0));
+            //loading player velocity
+            player.GetComponent<Rigidbody2D>().velocity = new Vector2(PlayerPrefs.GetFloat("playerXvel", 0), PlayerPrefs.GetFloat("playerYvel", 0));
+            //done for the player
+        }
+
         //now other stuff
 
         foreach (GameObject g in reloadableObjects)
