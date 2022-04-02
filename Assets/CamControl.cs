@@ -187,5 +187,22 @@ public class CamControl : MonoBehaviour
 
         zoom = true;
         rotate = true;
+
+        //StartCoroutine(TimedSmoothing()); even smoother transition
+    }
+
+    public IEnumerator TimedSmoothing()
+    {
+        camsmoothing = 0.0125f;
+        yield return new WaitForSecondsRealtime(0.3f);
+        camsmoothing = 0.0512f;
+        yield return new WaitForSecondsRealtime(0.6f);
+        camsmoothing = 0.0640f;
+        yield return new WaitForSecondsRealtime(0.8f);
+        camsmoothing = 0.64f;
+        yield return new WaitForSecondsRealtime(0.9f);
+        camsmoothing = 0.95f;
+        yield return new WaitForSecondsRealtime(1f);
+        camsmoothing = 0.128f;
     }
 }

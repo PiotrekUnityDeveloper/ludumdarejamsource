@@ -95,6 +95,8 @@ public class Saver : MonoBehaviour
                 //add tag and layermask support later 
             }
 
+
+
         }
 
         //cam pos
@@ -109,6 +111,8 @@ public class Saver : MonoBehaviour
         PlayerPrefs.SetFloat("cameraYoffset", camera1.GetComponent<CamControl>().camoffset.y);
         //Z offset is always set to -10 so no need to save it
 
+        PlayerPrefs.SetInt("cammode", GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CamControl>().cammode);
+
         //delay the text
         StartCoroutine(delaySavetext());
     }
@@ -117,7 +121,10 @@ public class Saver : MonoBehaviour
     {
         saveText.text = "Game Loaded";
 
-        if(noplayer == false)
+        //PlayerPrefs.SetInt("cammode", GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CamControl>().cammode); unusable
+        GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CamControl>().cammode = PlayerPrefs.GetInt("cammode");
+
+        if (noplayer == false)
         {
             //loading player position 
             player.transform.position = new Vector2(PlayerPrefs.GetFloat("playerXpos", 0), PlayerPrefs.GetFloat("playerYpos", 0));
