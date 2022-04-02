@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Saver : MonoBehaviour
 {
     [SerializeField] private GameObject player;
-    [SerializeField] private GameObject camera;
+    [SerializeField] private GameObject camera1;
+    [SerializeField] private Text saveText;
     public List<GameObject> reloadableObjects = new List<GameObject>();
     // Start is called before the first frame update
     void Start()
@@ -18,7 +20,7 @@ public class Saver : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.R))
         {
-            SaveLocalGame(true); //CHANGE TO FALSE LATER
+            SaveLocalGame(false); //CHANGE TO FALSE LATER edit: changed :D
         }
 
         if (Input.GetKeyDown(KeyCode.T))
@@ -32,6 +34,8 @@ public class Saver : MonoBehaviour
     //relies on PlayerPrefs :)
     public void SaveLocalGame(bool onlyPlayer)
     {
+        saveText.text = "Game Saved";
+
         if(onlyPlayer)
         {
             //player velocity
@@ -94,20 +98,25 @@ public class Saver : MonoBehaviour
         }
 
         //cam pos
-        PlayerPrefs.SetFloat("cameraXpos", camera.transform.position.x);
-        PlayerPrefs.SetFloat("cameraYpos", camera.transform.position.y);
+        PlayerPrefs.SetFloat("cameraXpos", camera1.transform.position.x);
+        PlayerPrefs.SetFloat("cameraYpos", camera1.transform.position.y);
 
         //cam rot
-        PlayerPrefs.SetFloat("cameraZrot", camera.transform.rotation.z);
+        PlayerPrefs.SetFloat("cameraZrot", camera1.transform.rotation.z);
 
         //cam offsets
-        PlayerPrefs.SetFloat("cameraXoffset", camera.GetComponent<CamControl>().camoffset.x);
-        PlayerPrefs.SetFloat("cameraYoffset", camera.GetComponent<CamControl>().camoffset.y);
+        PlayerPrefs.SetFloat("cameraXoffset", camera1.GetComponent<CamControl>().camoffset.x);
+        PlayerPrefs.SetFloat("cameraYoffset", camera1.GetComponent<CamControl>().camoffset.y);
         //Z offset is always set to -10 so no need to save it
+
+        //delay the text
+        StartCoroutine(delaySavetext());
     }
 
     public void LoadLocalGame()
     {
+        saveText.text = "Game Loaded";
+
         //loading player position 
         player.transform.position = new Vector2(PlayerPrefs.GetFloat("playerXpos", 0), PlayerPrefs.GetFloat("playerYpos", 0));
         //loading player rotation
@@ -135,11 +144,19 @@ public class Saver : MonoBehaviour
 
         //camera
         //load position of the camera
-        camera.transform.position = new Vector2(PlayerPrefs.GetFloat("cameraXpos", 0), PlayerPrefs.GetFloat("cameraYpos", 0));
+        camera1.transform.position = new Vector2(PlayerPrefs.GetFloat("cameraXpos", 0), PlayerPrefs.GetFloat("cameraYpos", 0));
         //load rotation of the caemraa
-        camera.transform.rotation = Quaternion.Euler(camera.transform.rotation.x, camera.transform.rotation.y, PlayerPrefs.GetFloat("cameraZrot", 0));
+        camera1.transform.rotation = Quaternion.Euler(camera1.transform.rotation.x, camera1.transform.rotation.y, PlayerPrefs.GetFloat("cameraZrot", 0));
         //load offset of the cameracontroll script (attached)
-        camera.GetComponent<CamControl>().camoffset = new Vector3(PlayerPrefs.GetFloat("cameraXoffset", 0), PlayerPrefs.GetFloat("cameraYoffset", 0), -10);
-        
+        camera1.GetComponent<CamControl>().camoffset = new Vector3(PlayerPrefs.GetFloat("cameraXoffset", 0), PlayerPrefs.GetFloat("cameraYoffset", 0), -10);
+
+        //delay the text
+        StartCoroutine(delaySavetext());
+    }
+
+    public IEnumerator delaySavetext()
+    {
+        yield return new WaitForSecondsRealtime(1.1f);
+        saveText.text = "";
     }
 }
