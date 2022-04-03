@@ -1,0 +1,12 @@
+fileFormatVersion: 2
+guid: 4f6d4fb09d30e2744be6af846efa4281
+ShaderImporter:
+  externalObjects: {}
+  defaultTextures:
+  - _BlurTex: {fileID: 8400000, guid: b5d412db69e7be04fa0356e3c2ea63ff, type: 2}
+  - _MainTex: {instanceID: 0}
+  nonModifiableTextures: []
+  preprocessorOverride: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
