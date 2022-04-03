@@ -7,7 +7,7 @@ public class menuscr : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        ///PlayerPrefs.DeleteAll(); //delete it later
     }
 
     // Update is called once per frame
@@ -26,6 +26,7 @@ public class menuscr : MonoBehaviour
     public void QuitGame()
     {
         //UnityEditor.PlayModeStateChange = UnityEditor.PlayModeStateChange.ExitingEditMode;
+        PlayerPrefs.DeleteAll();
         Application.Quit();
     }
 }

@@ -15,6 +15,9 @@ public class enemy : MonoBehaviour
 
     public bool isdashingenemy;
 
+    //should the y movement be always unlocked?
+    public bool yUnlocked;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -26,10 +29,14 @@ public class enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (move == false)
+        if (move == false && yUnlocked == false)
         {
             this.transform.position = lockedpos;
         }
+        else if (move == false && yUnlocked == true)
+            {
+                this.transform.position = new Vector2(lockedpos.x, this.transform.position.y);
+            }
 
         detectplayer();
         //fixeddetection();
@@ -254,6 +261,7 @@ public class enemy : MonoBehaviour
             GameObject.Find("music").GetComponent<AudioSource>().Stop();
             Time.timeScale = 0;
             gameoverscreen.SetActive(true);
+            PlayerPrefs.SetInt("Death", 1);
             StartCoroutine(restart());
         }
     }

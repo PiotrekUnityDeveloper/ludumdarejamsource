@@ -12,10 +12,19 @@ public class Saver : MonoBehaviour
     public List<GameObject> reloadableObjects = new List<GameObject>();
 
     public GameObject gameovscreen;
+    public GameObject menuscreen;
     // Start is called before the first frame update
     void Start()
     {
         Time.timeScale = 0;
+
+        if(PlayerPrefs.GetInt("Death", 0) == 1)
+        {
+            LoadLocalGame(false);
+            menuscreen.SetActive(false);
+            Time.timeScale = 1;
+            PlayerPrefs.DeleteKey("Death");
+        }
     }
 
     public Text tuttxt;
@@ -23,6 +32,12 @@ public class Saver : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(Input.GetKeyDown(KeyCode.R))
+        {
+            PlayerPrefs.DeleteKey("Death");
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
+
         if (gameovscreen.activeInHierarchy == true)
             return;
 

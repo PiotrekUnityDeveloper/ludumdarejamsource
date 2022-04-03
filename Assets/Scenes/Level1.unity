@@ -636,6 +636,7 @@ MonoBehaviour:
   detectionrange: 40
   rotaddiction: 0
   isdashingenemy: 0
+  yUnlocked: 0
   gameoverscreen: {fileID: 1311774442}
 --- !u!58 &141387970
 CircleCollider2D:
@@ -4919,6 +4920,7 @@ MonoBehaviour:
   detectionrange: 40
   rotaddiction: 0
   isdashingenemy: 0
+  yUnlocked: 0
   gameoverscreen: {fileID: 1311774442}
 --- !u!58 &1339789494
 CircleCollider2D:
@@ -5123,6 +5125,7 @@ MonoBehaviour:
   reloadableObjects:
   - {fileID: 2056271601}
   gameovscreen: {fileID: 1311774442}
+  menuscreen: {fileID: 1540960892}
   tuttxt: {fileID: 537427283}
 --- !u!4 &1342416504
 Transform:
@@ -6332,7 +6335,6 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
-  - {fileID: 1733265222}
   - {fileID: 1856424200}
   m_Father: {fileID: 0}
   m_RootOrder: 10
@@ -6764,11 +6766,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1733265221}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1045.0688, y: 170.01857, z: 248.70631}
-  m_LocalScale: {x: 80.89905, y: 80.89905, z: 80.89905}
+  m_LocalPosition: {x: 12.918185, y: 2.101614, z: 93.07428}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 1540960896}
-  m_RootOrder: 0
+  m_Father: {fileID: 0}
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1733265223
 MonoBehaviour:
@@ -7160,7 +7162,7 @@ RectTransform:
   - {fileID: 1345504176}
   - {fileID: 344175195}
   m_Father: {fileID: 1540960896}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -7468,7 +7470,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2123146718}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 14.9, y: 14.2, z: 0}
+  m_LocalPosition: {x: 78.6, y: 7, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children:
   - {fileID: 1184966088}
@@ -7490,7 +7492,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 0.2
+  m_GravityScale: 1
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -7517,6 +7519,7 @@ MonoBehaviour:
   detectionrange: 40
   rotaddiction: 0
   isdashingenemy: 0
+  yUnlocked: 1
   gameoverscreen: {fileID: 1311774442}
 --- !u!58 &2123146722
 CircleCollider2D:
@@ -7568,7 +7571,7 @@ MonoBehaviour:
   gravity: {x: 0, y: 0, z: 0}
   groundMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 64
   centerOffsetCompatibility: NaN
   repathRateCompatibility: NaN
   canSearchCompability: 0
