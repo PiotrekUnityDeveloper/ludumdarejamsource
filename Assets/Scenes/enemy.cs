@@ -19,7 +19,7 @@ public class enemy : MonoBehaviour
     void Start()
     {
         lockedpos = this.transform.position;
-        //move = false;
+        move = false;
         StartCoroutine(delaylockedpossetter());
     }
 
@@ -31,24 +31,29 @@ public class enemy : MonoBehaviour
             this.transform.position = lockedpos;
         }
 
-        //detectplayer();
+        detectplayer();
+        //fixeddetection();
     }
 
     //public static RaycastHit2D rh;
 
     private void FixedUpdate()
     {
-        fixeddetection();
+        //fixeddetection();
     }
 
     public void fixeddetection()
     {
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.forward, detectionrange);
-        RaycastHit2D hit2 = Physics2D.Raycast(transform.position, Vector2.left);
+        Vector2 desiredDir;
+        desiredDir = player.transform.position-this.transform.position;
+
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, desiredDir, detectionrange);
+        RaycastHit2D hit2 = Physics2D.Raycast(transform.position, desiredDir);
         RaycastHit2D hit3 = Physics2D.Raycast(transform.position, Vector2.up);
         RaycastHit2D hit4 = Physics2D.Raycast(transform.position, Vector2.down);
 
         Debug.DrawLine(this.transform.position, player.transform.position, Color.blue, 0.01f);
+        Debug.DrawRay(new Vector2(this.transform.position.x, this.transform.position.y + 10), player.transform.position, Color.black, 0.05f);
 
         move = false;
 
@@ -73,16 +78,24 @@ public class enemy : MonoBehaviour
         }
 
         //done i think
+
+        print(move);
     }
 
     public void detectplayer()
     {
         
         this.transform.rotation = Quaternion.Euler(this.transform.rotation.x, this.transform.rotation.y, this.transform.rotation.z - 90);
-        RaycastHit2D rh = Physics2D.Raycast(this.transform.position, transform.right, detectionrange, 1, playermask);
+        RaycastHit2D rh = Physics2D.Raycast(this.transform.position, Vector2.down, detectionrange, playermask);
+        RaycastHit2D rh2 = Physics2D.Raycast(this.transform.position, Vector2.up, detectionrange, playermask);
+        RaycastHit2D rh3 = Physics2D.Raycast(this.transform.position, Vector2.right, detectionrange, playermask);
+        RaycastHit2D rh4 = Physics2D.Raycast(this.transform.position, Vector2.left, detectionrange, playermask);
+        RaycastHit2D rh5 = Physics2D.Raycast(this.transform.position, transform.forward, detectionrange, playermask);
+        RaycastHit2D rh6 = Physics2D.Raycast(this.transform.position, transform.up, detectionrange, playermask);
+        RaycastHit2D rh7 = Physics2D.Raycast(this.transform.position, transform.right, detectionrange, playermask);
         //this.transform.rotation = Quaternion.Euler(this.transform.rotation.x, this.transform.rotation.y, this.transform.rotation.z - 90);
         //Vector3 direction = player.transform.position - transform.position;
-        Debug.DrawLine(this.transform.position, player.transform.position, Color.black, 1);
+        // Debug.DrawLine(this.transform.position, player.transform.position, Color.black, 1);
         Debug.DrawRay(this.transform.position, player.transform.position, Color.gray, 0.2f);
 
         Debug.DrawLine(this.transform.position, this.transform.right, Color.white, 0.1f);
@@ -103,16 +116,100 @@ public class enemy : MonoBehaviour
             //move = false;
         }
 
-        if(move == true)
+        if (rh2.collider != null)
+        {
+            if (rh2.collider.gameObject.tag == "Player" || rh2.collider.gameObject.name == "Player")
+            {
+                move = true;
+                print(rh2.collider.gameObject.name);
+            }
+        }
+        else
+        {
+
+            //move = false;
+        }
+
+        if (rh3.collider != null)
+        {
+            if (rh3.collider.gameObject.tag == "Player" || rh3.collider.gameObject.name == "Player")
+            {
+                move = true;
+                print(rh3.collider.gameObject.name);
+            }
+        }
+        else
+        {
+
+            //move = false;
+        }
+
+        if (rh4.collider != null)
+        {
+            if (rh4.collider.gameObject.tag == "Player" || rh4.collider.gameObject.name == "Player")
+            {
+                move = true;
+                print(rh4.collider.gameObject.name);
+            }
+        }
+        else
+        {
+
+            //move = false;
+        }
+
+        if (rh5.collider != null)
+        {
+            if (rh5.collider.gameObject.tag == "Player" || rh5.collider.gameObject.name == "Player")
+            {
+                move = true;
+                print(rh5.collider.gameObject.name);
+            }
+        }
+        else
+        {
+
+            //move = false;
+        }
+
+        if (rh6.collider != null)
+        {
+            if (rh6.collider.gameObject.tag == "Player" || rh6.collider.gameObject.name == "Player")
+            {
+                move = true;
+                print(rh6.collider.gameObject.name);
+            }
+        }
+        else
+        {
+
+            //move = false;
+        }
+
+        if (rh7.collider != null)
+        {
+            if (rh7.collider.gameObject.tag == "Player" || rh7.collider.gameObject.name == "Player")
+            {
+                move = true;
+                print(rh7.collider.gameObject.name);
+            }
+        }
+        else
+        {
+
+            //move = false;
+        }
+
+        if (move == true)
         {
             if(Vector2.Distance(this.transform.position, player.transform.position) > maxfollowdist)
             {
-                //move = false;
+                move = false;
             }
 
         }
 
-        if(Vector2.Distance(this.transform.position, player.transform.position) < 5)
+        if(Vector2.Distance(this.transform.position, player.transform.position) < 5 && isdashingenemy == true)
         {
             StartCoroutine(dash());
             move = false;
@@ -125,7 +222,7 @@ public class enemy : MonoBehaviour
         for(int i = 0; i < 2; i++)
         {
             yield return new WaitForSecondsRealtime(0.4f);
-            this.transform.position = transform.up * -0.1f;
+            this.transform.position = transform.forward * -0.1f;
             Debug.Log("dashing!");
         }
     }
@@ -141,5 +238,21 @@ public class enemy : MonoBehaviour
         yield return new WaitForSecondsRealtime(1);
         lockedpos = this.transform.position;
         StartCoroutine(delaylockedpossetter());
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        
+    }
+
+    public GameObject gameoverscreen;
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.tag == "Player")
+        {
+            Time.timeScale = 0;
+            gameoverscreen.SetActive(true);
+        }
     }
 }

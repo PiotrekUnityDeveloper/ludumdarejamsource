@@ -17,10 +17,12 @@ public class SandboxManager : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Tab))
         {
+            ApplyChanges();
             optioncanvas.SetActive(!optioncanvas.activeInHierarchy);
+            ApplyChanges();
         }
 
-        ApplyChanges();
+        
     }
 
     public Slider movespeedRight;
@@ -35,8 +37,15 @@ public class SandboxManager : MonoBehaviour
         if (optioncanvas.activeInHierarchy == false)
             return;
 
+        if (gravity.isOn == false)
+        {
+            gravitystrenghtY.value = 0;
+        }
+
         //modifying physics
         Physics.gravity = new Vector2(gravitystrenghtX.value, gravitystrenghtY.value);
+        print(Physics.gravity.x + " - x gravity");
+        print(Physics.gravity.y + " - y gravity");
 
         if(gravity.isOn == false)
         {
@@ -46,5 +55,13 @@ public class SandboxManager : MonoBehaviour
         GameObject.Find("Player").GetComponent<PlayerMovement>().moveleftspeed = movespeedLeft.value;
         GameObject.Find("Player").GetComponent<PlayerMovement>().moverightspeed = movespeedRight.value;
         GameObject.Find("Player").GetComponent<PlayerMovement>().jumpHeight = jumpheight.value;
+
+        Rigidbody2D[] rb;
+        rb = GameObject.FindObjectsOfType<Rigidbody2D>();
+        foreach(Rigidbody2D rb2d in rb)
+        {
+            rb2d.gravityScale = gravitystrenghtY.value;
+            
+        }
     }
 }

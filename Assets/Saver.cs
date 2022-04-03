@@ -9,6 +9,8 @@ public class Saver : MonoBehaviour
     [SerializeField] private GameObject camera1;
     [SerializeField] private Text saveText;
     public List<GameObject> reloadableObjects = new List<GameObject>();
+
+    public GameObject gameovscreen;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,6 +20,9 @@ public class Saver : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (gameovscreen.activeInHierarchy == true)
+            return;
+
         if (Input.GetKeyDown(KeyCode.Q))
         {
             SaveLocalGame(false); //CHANGE TO FALSE LATER edit: changed :D
