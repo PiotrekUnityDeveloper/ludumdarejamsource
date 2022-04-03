@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Saver : MonoBehaviour
 {
@@ -17,6 +18,8 @@ public class Saver : MonoBehaviour
         
     }
 
+    public Text tuttxt;
+
     // Update is called once per frame
     void Update()
     {
@@ -28,8 +31,15 @@ public class Saver : MonoBehaviour
             SaveLocalGame(false); //CHANGE TO FALSE LATER edit: changed :D
         }
 
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E) && SceneManager.GetActiveScene().name != "Level1")
         {
+            LoadLocalGame(false);
+        }
+
+        if (Input.GetKeyDown(KeyCode.E) && SceneManager.GetActiveScene().name == "Level1")
+        {
+            //LoadLocalGame(false);
+            tuttxt.text = "Now, use your powers to avoid these enemies";
             LoadLocalGame(false);
         }
     }
