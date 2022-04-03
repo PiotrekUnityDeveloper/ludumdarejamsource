@@ -3816,6 +3816,7 @@ MonoBehaviour:
   saveText: {fileID: 953607952}
   reloadableObjects:
   - {fileID: 2056271601}
+  - {fileID: 868979443}
   gameovscreen: {fileID: 1311774442}
   tuttxt: {fileID: 537427283}
 --- !u!4 &1342416504

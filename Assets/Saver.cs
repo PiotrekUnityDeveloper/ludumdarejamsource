@@ -15,7 +15,7 @@ public class Saver : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        Time.timeScale = 1;
     }
 
     public Text tuttxt;
@@ -88,26 +88,35 @@ public class Saver : MonoBehaviour
 
             foreach(GameObject g in reloadableObjects)
             {
-                //position
-                PlayerPrefs.SetFloat(g.name + "Xpos", g.transform.position.x);
-                PlayerPrefs.SetFloat(g.name + "Ypos", g.transform.position.y);
+                
 
-                //rotation (Z only)
-                PlayerPrefs.SetFloat(g.name + "Zrot", g.transform.rotation.z);
+                if (g.tag == "tutorialtooltip")
+                {
+                    PlayerPrefs.SetInt("tuttip", 1);
+                }
+                else
+                {
+                    //position
+                    PlayerPrefs.SetFloat(g.name + "Xpos", g.transform.position.x);
+                    PlayerPrefs.SetFloat(g.name + "Ypos", g.transform.position.y);
 
-                //velocity
-                PlayerPrefs.SetFloat(g.name + "Xvel", g.GetComponent<Rigidbody2D>().velocity.x);
-                PlayerPrefs.SetFloat(g.name + "Yvel", g.GetComponent<Rigidbody2D>().velocity.y);
+                    //rotation (Z only)
+                    PlayerPrefs.SetFloat(g.name + "Zrot", g.transform.rotation.z);
 
-                //is object enabled
-                PlayerPrefs.SetInt(g.name + "enabled", (g.activeInHierarchy ? 1 : 0));
-                ///getting the bool code:
-                ///bool getenabled = PlayerPrefs.GetInt(g.name + "enabled", 0) > 0;
+                    //velocity
+                    PlayerPrefs.SetFloat(g.name + "Xvel", g.GetComponent<Rigidbody2D>().velocity.x);
+                    PlayerPrefs.SetFloat(g.name + "Yvel", g.GetComponent<Rigidbody2D>().velocity.y);
 
-                //rb settings
-                PlayerPrefs.SetFloat(g.name + "gravity", g.GetComponent<Rigidbody2D>().gravityScale); //object's grav
-                //more code here
-                //add tag and layermask support later 
+                    //is object enabled
+                    PlayerPrefs.SetInt(g.name + "enabled", (g.activeInHierarchy ? 1 : 0));
+                    ///getting the bool code:
+                    ///bool getenabled = PlayerPrefs.GetInt(g.name + "enabled", 0) > 0;
+
+                    //rb settings
+                    PlayerPrefs.SetFloat(g.name + "gravity", g.GetComponent<Rigidbody2D>().gravityScale); //object's grav
+                                                                                                          //more code here
+                                                                                                          //add tag and layermask support later 
+                }
             }
 
 
@@ -154,18 +163,29 @@ public class Saver : MonoBehaviour
 
         foreach (GameObject g in reloadableObjects)
         {
-            //other stuff
-            g.transform.position = new Vector2(PlayerPrefs.GetFloat(g.name + "Xpos", 0), PlayerPrefs.GetFloat(g.name + "Ypos", 0));
-            //now rotation
-            g.transform.rotation = Quaternion.Euler(g.transform.rotation.x, g.transform.rotation.y, PlayerPrefs.GetFloat(g.name + "Zrot", 0));
-            //velocity
-            g.gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(PlayerPrefs.GetFloat(g.name + "Xvel", 0), PlayerPrefs.GetFloat(g.name + "Yvel", 0));
-            //and finally, the gravity
-            g.GetComponent<Rigidbody2D>().gravityScale = PlayerPrefs.GetFloat(g.name + "gravity", 0);
-            //is the object enabled?
-            //retrieve the bool first
-            bool b = PlayerPrefs.GetInt(g.name + "enabled", 0) > 0;
-            g.gameObject.SetActive(b); //setting the object to the variable val
+            if(g.tag == "tutorialtooltip" && PlayerPrefs.GetInt("tuttip", 0) == 1)
+            {
+                g.GetComponent<Animator>().SetTrigger("back");
+            }
+            else
+            {
+                //other stuff
+                g.transform.position = new Vector2(PlayerPrefs.GetFloat(g.name + "Xpos", 0), PlayerPrefs.GetFloat(g.name + "Ypos", 0));
+                //now rotation
+                g.transform.rotation = Quaternion.Euler(g.transform.rotation.x, g.transform.rotation.y, PlayerPrefs.GetFloat(g.name + "Zrot", 0));
+                //velocity
+                g.gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(PlayerPrefs.GetFloat(g.name + "Xvel", 0), PlayerPrefs.GetFloat(g.name + "Yvel", 0));
+                //and finally, the gravity
+                g.GetComponent<Rigidbody2D>().gravityScale = PlayerPrefs.GetFloat(g.name + "gravity", 0);
+                //is the object enabled?
+                //retrieve the bool first
+                bool b = PlayerPrefs.GetInt(g.name + "enabled", 0) > 0;
+                g.gameObject.SetActive(b); //setting the object to the variable val
+            }
+
+            
+
+
         }
 
         //camera
