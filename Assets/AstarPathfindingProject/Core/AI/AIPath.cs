@@ -353,6 +353,8 @@ namespace Pathfinding {
 			}
 			if (updateRotation) simulatedRotation = tr.rotation;
 
+			//simulatedRotation = Quaternion.Euler(simulatedRotation.x, simulatedRotation.y, simulatedRotation.z + 90);
+
 			var currentPosition = simulatedPosition;
 
 			// Update which point we are moving towards
