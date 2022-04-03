@@ -5,12 +5,12 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     //TODO: sort these variables
-    [SerializeField] private float groundDistance;
+    public float groundDistance;
     [SerializeField] private GameObject playerObj;
-    [SerializeField] private float jumpHeight;
+    public float jumpHeight;
     [SerializeField] private LayerMask groundLayer;
-    [SerializeField] private float moveleftspeed;
-    [SerializeField] private float moverightspeed;
+    public float moveleftspeed;
+    public float moverightspeed;
     // Start is called before the first frame update
     void Start()
     {

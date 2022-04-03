@@ -18,12 +18,12 @@ public class Saver : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R))
+        if (Input.GetKeyDown(KeyCode.Q))
         {
             SaveLocalGame(false); //CHANGE TO FALSE LATER edit: changed :D
         }
 
-        if (Input.GetKeyDown(KeyCode.T))
+        if (Input.GetKeyDown(KeyCode.E))
         {
             LoadLocalGame(false);
         }
