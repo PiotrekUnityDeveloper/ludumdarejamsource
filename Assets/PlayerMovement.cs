@@ -16,7 +16,7 @@ public class PlayerMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        StartCoroutine(checkforcollairjump());
     }
 
     // Update is called once per frame
@@ -70,6 +70,23 @@ public class PlayerMovement : MonoBehaviour
         
     }
 
+    public IEnumerator checkforcollairjump()
+    {
+        yield return new WaitForSecondsRealtime(1);
+
+        if(this.gameObject.GetComponent<BoxCollider2D>().IsTouchingLayers(8) == false)
+        {
+            universaljumpval = false;
+        }
+
+        if (this.gameObject.GetComponent<BoxCollider2D>().IsTouchingLayers(8) == true)
+        {
+            universaljumpval = true;
+        }
+
+        StartCoroutine(checkforcollairjump());
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "airjump")
@@ -87,10 +104,6 @@ public class PlayerMovement : MonoBehaviour
         if (collision.gameObject.tag == "airjump")
         {
             universaljumpval = true;
-        }
-        else
-        {
-            universaljumpval = false;
         }
     }
 
