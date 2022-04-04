@@ -850,12 +850,15 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   move: 0
+  fall: 0
   player: {fileID: 1398676842}
   maxfollowdist: 10
   detectionrange: 40
   rotaddiction: 0
   isdashingenemy: 0
   yUnlocked: 0
+  gravitational: 0
+  grav: 0
   gameoverscreen: {fileID: 1311774442}
 --- !u!58 &141387970
 CircleCollider2D:
@@ -6882,12 +6885,15 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   move: 0
+  fall: 0
   player: {fileID: 1398676842}
   maxfollowdist: 10
   detectionrange: 40
   rotaddiction: 0
   isdashingenemy: 0
   yUnlocked: 0
+  gravitational: 0
+  grav: 0
   gameoverscreen: {fileID: 1311774442}
 --- !u!58 &1339789494
 CircleCollider2D:
@@ -10820,12 +10826,15 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   move: 0
+  fall: 0
   player: {fileID: 1398676842}
   maxfollowdist: 10
   detectionrange: 40
   rotaddiction: 0
   isdashingenemy: 0
   yUnlocked: 1
+  gravitational: 1
+  grav: -1
   gameoverscreen: {fileID: 1311774442}
 --- !u!58 &2123146722
 CircleCollider2D:

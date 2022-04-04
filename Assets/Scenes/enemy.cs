@@ -7,6 +7,9 @@ public class enemy : MonoBehaviour
     public LayerMask playermask;
     public bool move;
     private Vector2 lockedpos;
+
+    public bool fall;
+
     public GameObject player;
     public float maxfollowdist;
 
@@ -17,6 +20,7 @@ public class enemy : MonoBehaviour
 
     //should the y movement be always unlocked?
     public bool yUnlocked;
+    public bool gravitational;
 
     // Start is called before the first frame update
     void Start()
@@ -89,9 +93,18 @@ public class enemy : MonoBehaviour
         print(move);
     }
 
+    public float grav;
+
     public void detectplayer()
     {
-        
+        if(gravitational == true && fall == true)
+        {
+            this.transform.position = new Vector2(this.transform.position.x, this.transform.position.y - grav);
+            grav += 0.05f;
+            //yes
+        }
+
+
         this.transform.rotation = Quaternion.Euler(this.transform.rotation.x, this.transform.rotation.y, this.transform.rotation.z - 90);
         RaycastHit2D rh = Physics2D.Raycast(this.transform.position, Vector2.down, detectionrange, playermask);
         RaycastHit2D rh2 = Physics2D.Raycast(this.transform.position, Vector2.up, detectionrange, playermask);
@@ -270,5 +283,28 @@ public class enemy : MonoBehaviour
     {
         yield return new WaitForSecondsRealtime(1);
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        if(collision.gameObject.layer == 6)
+        {
+            fall = false;
+            grav = -1;
+        }
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.layer == 6)
+        {
+            fall = true;
+            grav = -1;
+        }
     }
 }
