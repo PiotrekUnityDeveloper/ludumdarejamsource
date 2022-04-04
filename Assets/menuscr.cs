@@ -19,8 +19,18 @@ public class menuscr : MonoBehaviour
     public GameObject menuobj;
     public void Showmenu()
     {
+        if (menuobj.activeInHierarchy == false)
+            return;
+
         menuobj.GetComponent<Animator>().SetTrigger("playmenu");
         Time.timeScale = 1;
+        StartCoroutine(disablemenuscreen());
+    }
+
+    public IEnumerator disablemenuscreen()
+    {
+        yield return new WaitForSecondsRealtime(2f);
+        menuobj.SetActive(false);
     }
 
     public void QuitGame()
