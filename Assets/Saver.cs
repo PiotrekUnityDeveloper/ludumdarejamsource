@@ -13,6 +13,9 @@ public class Saver : MonoBehaviour
 
     public GameObject gameovscreen;
     public GameObject menuscreen;
+
+    public AudioSource main;
+    public AudioSource menu;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,6 +26,8 @@ public class Saver : MonoBehaviour
             LoadLocalGame(false);
             menuscreen.SetActive(false);
             Time.timeScale = 1;
+            menu.Stop();
+            main.Play();
             PlayerPrefs.DeleteKey("Death");
         }
     }
