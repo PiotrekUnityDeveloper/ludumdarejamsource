@@ -22,9 +22,17 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        if ((Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.W)) && universaljumpval == true) //for airjump blocks
+        {
+            playerObj.GetComponent<Rigidbody2D>().velocity = new Vector2(this.playerObj.GetComponent<Rigidbody2D>().velocity.x, jumpHeight);
+            Debug.DrawRay(playerObj.transform.position, -Vector3.up, Color.green, groundDistance - 0.2f);
+
+        }
+
         //TODO: strafing in air speed reduction + code cleanup
         //print(isGrounded());
-        if((Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.W)) && isGrounded())
+        if ((Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.W)) && isGrounded())
         {
             playerObj.GetComponent<Rigidbody2D>().velocity = new Vector2(this.playerObj.GetComponent<Rigidbody2D>().velocity.x, jumpHeight);
             Debug.DrawRay(playerObj.transform.position, -Vector3.up, Color.green, groundDistance - 0.2f);
@@ -82,6 +90,13 @@ public class PlayerMovement : MonoBehaviour
         if (this.gameObject.GetComponent<BoxCollider2D>().IsTouchingLayers(8) == true)
         {
             universaljumpval = true;
+        }
+
+        if ((Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.W)) && universaljumpval == true) //for airjump blocks
+        {
+            playerObj.GetComponent<Rigidbody2D>().velocity = new Vector2(this.playerObj.GetComponent<Rigidbody2D>().velocity.x, jumpHeight);
+            Debug.DrawRay(playerObj.transform.position, -Vector3.up, Color.green, groundDistance - 0.2f);
+
         }
 
         StartCoroutine(checkforcollairjump());
