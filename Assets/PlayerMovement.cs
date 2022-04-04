@@ -11,6 +11,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private LayerMask groundLayer;
     public float moveleftspeed;
     public float moverightspeed;
+
+    public bool universaljumpval = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -45,6 +47,13 @@ public class PlayerMovement : MonoBehaviour
             playerObj.GetComponent<Rigidbody2D>().AddForce(new Vector2(moverightspeed * 1f, 0), ForceMode2D.Impulse);
         }
 
+        if ((Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.W)) && universaljumpval == true) //for airjump blocks
+        {
+            playerObj.GetComponent<Rigidbody2D>().velocity = new Vector2(this.playerObj.GetComponent<Rigidbody2D>().velocity.x, jumpHeight);
+            Debug.DrawRay(playerObj.transform.position, -Vector3.up, Color.green, groundDistance - 0.2f);
+
+        }
+
         //print(playerObj.GetComponent<Rigidbody2D>().velocity.x.ToString());
         Debug.DrawRay(playerObj.transform.position, -Vector3.up, Color.red, 0.01f);
     }
@@ -53,5 +62,35 @@ public class PlayerMovement : MonoBehaviour
     {
         Debug.DrawRay(playerObj.transform.position, -Vector3.up, Color.yellow, groundDistance - 0.2f);
         return Physics2D.Raycast(playerObj.transform.position, -Vector3.up, groundDistance + 0.1f, groundLayer);
+    }
+
+
+    private void OnTriggerEnter(Collider other)
+    {
+        
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "airjump")
+        {
+            universaljumpval = true;
+        }
+        else
+        {
+            universaljumpval = false;
+        }
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "airjump")
+        {
+            universaljumpval = true;
+        }
+        else
+        {
+            universaljumpval = false;
+        }
     }
 }
