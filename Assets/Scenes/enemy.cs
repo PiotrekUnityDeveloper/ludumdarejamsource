@@ -290,7 +290,7 @@ public class enemy : MonoBehaviour
         if(collision.gameObject.layer == 6)
         {
             fall = false;
-            grav = -1;
+            grav = 0;
         }
     }
 
@@ -304,7 +304,7 @@ public class enemy : MonoBehaviour
         if (collision.gameObject.layer == 6)
         {
             fall = true;
-            grav = -1;
+            grav = 0;
         }
     }
 }
