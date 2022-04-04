@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class menuscr : MonoBehaviour
 {
+    public AudioSource mainmusic;
+    public AudioSource menumusic;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -21,6 +24,9 @@ public class menuscr : MonoBehaviour
     {
         if (menuobj.activeInHierarchy == false)
             return;
+
+        menumusic.Stop();
+        mainmusic.Play();
 
         menuobj.GetComponent<Animator>().SetTrigger("playmenu");
         Time.timeScale = 1;
