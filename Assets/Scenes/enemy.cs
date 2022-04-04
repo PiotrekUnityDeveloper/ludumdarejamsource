@@ -52,7 +52,7 @@ public class enemy : MonoBehaviour
     {
         //fixeddetection();
 
-        if (this.gameObject.GetComponent<BoxCollider2D>().IsTouchingLayers(6) == false)
+        if (this.gameObject.GetComponent<CircleCollider2D>().IsTouchingLayers(6) == false)
         {
             fall = true;
             //grav = 0; cant modify it every frame
