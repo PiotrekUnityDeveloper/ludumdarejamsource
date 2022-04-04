@@ -7643,6 +7643,8 @@ MonoBehaviour:
   - {fileID: 2056271601}
   gameovscreen: {fileID: 1311774442}
   menuscreen: {fileID: 1540960892}
+  main: {fileID: 253289722}
+  menu: {fileID: 794083405}
   tuttxt: {fileID: 537427283}
 --- !u!4 &1342416504
 Transform:
