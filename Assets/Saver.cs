@@ -27,7 +27,7 @@ public class Saver : MonoBehaviour
     {
         Time.timeScale = 0;
 
-        if(PlayerPrefs.GetInt("Death", 0) == 1)
+        if(PlayerPrefs.GetInt("Death", 0) == 1 && SceneManager.GetActiveScene().name != "Level2")
         {
             LoadLocalGame(false);
             menuscreen.SetActive(false);
@@ -35,6 +35,11 @@ public class Saver : MonoBehaviour
             menu.Stop();
             main.Play();
             PlayerPrefs.DeleteKey("Death");
+        }
+
+        if(SceneManager.GetActiveScene().name == "Level2")
+        {
+            Time.timeScale = 1;
         }
     }
 
