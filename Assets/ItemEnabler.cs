@@ -5,6 +5,9 @@ using UnityEngine;
 public class ItemEnabler : MonoBehaviour
 {
     [SerializeField] private List<GameObject> items2enable = new List<GameObject>();
+    public bool setactive = true;
+    public bool onlyplayer = true;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -19,9 +22,11 @@ public class ItemEnabler : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (collision.gameObject.tag != "Player" && onlyplayer == true) return;
+
         foreach(GameObject item in items2enable)
         {
-            item.SetActive(true);
+            item.SetActive(setactive);
         }
     }
 }
