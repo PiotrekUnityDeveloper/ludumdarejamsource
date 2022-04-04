@@ -16,6 +16,12 @@ public class Saver : MonoBehaviour
 
     public AudioSource main;
     public AudioSource menu;
+
+    private void Awake()
+    {
+        //cant make it load on awake, sorry
+    }
+
     // Start is called before the first frame update
     void Start()
     {
