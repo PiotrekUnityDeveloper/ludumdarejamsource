@@ -31,7 +31,7 @@ public class PlayerKiller : MonoBehaviour
             GameObject.Find("music").GetComponent<AudioSource>().Stop();
             Time.timeScale = 0;
             gameoverscreen.SetActive(true);
-            PlayerPrefs.SetInt("Death", 1);
+            PlayerPrefs.SetInt("Death", 1); 
             StartCoroutine(restart());
         }
     }
